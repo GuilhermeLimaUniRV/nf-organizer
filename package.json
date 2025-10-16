@@ -1,0 +1,25 @@
+{
+  "name": "nf-organizer-backend",
+  "version": "1.0.0",
+  "description": "Api do projeto NF Organizer desenvolvido para gestão de Notas Fiscais utilizando agentes de inteligência artificial, desenvolvimento da matéria de Prática de Engenharia de Software.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guiml345/nf-organizer-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Guiml345/nf-organizer-backend/issues"
+  },
+  "homepage": "https://github.com/Guiml345/nf-organizer-backend#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

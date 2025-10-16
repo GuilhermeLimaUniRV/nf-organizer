@@ -1,0 +1,12 @@
+# Arquivos e diretórios ignorados pelo Git que o Docker também deve ignorar
+.git
+.gitignore
+.vscode
+
+# A pasta de dependências JÁ ESTÁ instalada DENTRO do contêiner
+# Não copie a versão local, senão ela sobrescreverá a que foi instalada
+node_modules
+/node_modules
+
+# Variáveis de ambiente
+.env
