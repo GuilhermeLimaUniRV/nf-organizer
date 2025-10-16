@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   return res.json({ 
-    message: 'API rodando! Usando ES Modules (import).'
+    message: 'API rodando!   Usando ES Modules (import).'
   });
 });
 
