@@ -29,7 +29,7 @@ Siga estes passos exatos para subir a aplicação completa:
 Passo 1: Clonar e Navegar
 Bash
 
-git clone https://www.dio.me/articles/enviando-seu-projeto-para-o-github
+git clone https://github.com/GuilhermeLimaUniRV/nf-organizer.git
 cd nf-organizer-fullstack
 Passo 2: Configurar Variáveis de Ambiente
 Crie um arquivo chamado .env na raiz do repositório (no mesmo nível do docker-compose.yml).
