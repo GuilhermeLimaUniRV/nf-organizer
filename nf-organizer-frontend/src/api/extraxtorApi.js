@@ -1,7 +1,7 @@
 // src/api/extractorApi.js
 
 // URL da sua API Node.js (conforme mapeado no Docker Compose/Run)
-const API_URL = 'http://localhost:8080/processar-nf';
+const API_URL = 'http://localhost:3000/processar-nf';
 
 export const processarNotaFiscal = async (file) => {
     const formData = new FormData();
