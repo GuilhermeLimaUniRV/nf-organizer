@@ -12,7 +12,7 @@ services:
     
     # Mapeamento da porta do contêiner (3000) para o host (8080)
     ports:
-      - "8080:3000" 
+      - "3000:3000" 
 
     # Injeta a GEMINI_API_KEY e outras variáveis do .env global
     env_file:

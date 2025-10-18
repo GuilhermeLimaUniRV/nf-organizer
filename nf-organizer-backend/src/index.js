@@ -73,7 +73,7 @@ app.post('/processar-nf', upload, async (req, res) => {
 // ---------------------------------
 
 const server = app.listen(PORT, () => {
-    console.log(`Servidor Node.js rodando na porta ${PORT}`);
+    console.log(`Servidor Node.js rodando na porta http://localhost:${PORT}`);
     // A porta externa mapeada pelo Docker será 8080
 });
 
