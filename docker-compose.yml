@@ -1,0 +1,51 @@
+# /nf-organizer-fullstack/docker-compose.yml
+
+version: '3.8' # Versão recomendada do Docker Compose
+
+services:
+  # 1. SERVIÇO BACKEND (Sua API Node.js)
+  backend:
+    build:
+      context: ./nf-organizer-backend  # Procura o Dockerfile dentro desta pasta
+      dockerfile: Dockerfile
+    container_name: nf_backend_dev
+    
+    # Mapeamento da porta do contêiner (3000) para o host (8080)
+    ports:
+      - "8080:3000" 
+
+    # Injeta a GEMINI_API_KEY e outras variáveis do .env global
+    env_file:
+      - .env 
+    
+    # Monta o código-fonte localmente para que o 'node --watch' funcione (Hot Reload)
+    volumes:
+      - ./nf-organizer-backend:/usr/src/app
+      - /usr/src/app/node_modules # Impede que o node_modules local sobrescreva o do contêiner
+    
+    # Comando de inicialização
+    command: npm run dev 
+
+  # 2. SERVIÇO FRONTEND (Seu App React/Vite)
+  frontend:
+    build:
+      context: ./nf-organizer-frontend # Procura o Dockerfile dentro desta pasta
+      dockerfile: Dockerfile
+    container_name: nf_frontend_dev
+    
+    # Mapeia a porta do React/Vite (ex: 5173) para o host (3000, 5173, etc.)
+    ports:
+      - "5173:5173" 
+    
+    # Monta o código para Hot Reload do Frontend
+    volumes:
+      - ./nf-organizer-frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    
+    # O frontend se comunica com o backend usando o nome do serviço: http://backend:3000
+    environment:
+      # Define a URL do backend para o React usar no fetch()
+      VITE_API_URL: http://backend:3000 
+    
+    # Comando de inicialização do React/Vite
+    command: npm run dev

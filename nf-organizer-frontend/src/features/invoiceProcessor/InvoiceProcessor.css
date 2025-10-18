@@ -1,0 +1,71 @@
+/* src/features/InvoiceProcessor/InvoiceProcessor.css */
+.invoice-processor-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff; /* Fundo branco do card principal */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 5px;
+}
+.app-header p {
+    color: #666;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+h3 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Status Messages */
+.loader-text, .error-message {
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.loader-text {
+    background-color: #e6f7ff;
+    color: #1890ff;
+}
+
+.error-message {
+    background-color: #fff1f0;
+    color: #cf1322;
+}
+
+/* --- TABS --- */
+.tabs-container {
+    display: flex;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+    color: #1890ff;
+    border-bottom: 2px solid #1890ff;
+    font-weight: bold;
+}

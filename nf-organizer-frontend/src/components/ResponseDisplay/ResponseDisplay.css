@@ -1,0 +1,47 @@
+.json-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.json-header p {
+    margin: 0;
+    color: #333;
+}
+
+.copy-button {
+    background-color: #e8e8e8;
+    border: 1px solid #d9d9d9;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.json-code-block {
+    background-color: #282c34;
+    color: #d1d1d1;
+    padding: 20px;
+    margin: 0;
+    border-radius: 0 0 4px 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    
+    text-align: left; 
+    white-space: pre-wrap; 
+    word-break: break-all;    
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.json-footer {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
