@@ -1,0 +1,14 @@
+# Arquivos que NÃO devem ser copiados para a imagem do contêiner:
+
+# Pastas de dependências que serão instaladas no Docker
+node_modules
+
+# Arquivo .env que é injetado pelo docker-compose e não deve ser copiado
+.env
+
+# Outros arquivos de configuração/build
+.dockerignore
+Dockerfile
+.git
+.gitignore
+.DS_Store
