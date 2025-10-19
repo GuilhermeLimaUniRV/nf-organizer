@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "db:migrate": "npx prisma migrate deploy",
-    "dev": "npm run db:migrate && node --watch ./src/index.js",
+    "dev": "npm run db:migrate && npx prisma generate && node --watch ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

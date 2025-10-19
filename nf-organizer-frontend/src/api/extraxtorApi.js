@@ -1,33 +1,67 @@
 // src/api/extractorApi.js
 
-// URL da sua API Node.js (conforme mapeado no Docker Compose/Run)
-const API_URL = 'http://localhost:3000/processar-nf';
+const API_BASE_URL = 'http://localhost:3000/api/notaFiscal';
+
+const EXTRACTION_API_URL = `${API_BASE_URL}/processar-nf`; 
+const VERIFICATION_API_URL = `${API_BASE_URL}/verificar-existencia`; 
+const PERSISTENCE_API_URL = `${API_BASE_URL}/persistir-movimento`; 
 
 export const processarNotaFiscal = async (file) => {
     const formData = new FormData();
-    
-    // O nome do campo deve ser EXATAMENTE 'pdf_file' 
-    // (como definido no Multer no seu backend Node.js)
     formData.append('pdf_file', file); 
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(EXTRACTION_API_URL, {
             method: 'POST',
             body: formData,
-            // Não defina Content-Type; o navegador faz isso automaticamente
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-            // Lançar erro para ser capturado pelo componente
-            throw new Error(data.error || `Erro HTTP: ${response.status} - Falha ao processar`);
+            throw new Error(data.error || `Erro HTTP: ${response.status} - Falha na extração da IA`);
         }
-
-        return data; // O JSON estruturado do Gemini
-
+        return data;
     } catch (error) {
-        console.error('Erro na requisição da API:', error);
         return { error: error.message || 'Falha na comunicação com o servidor.' };
+    }
+};
+
+export const verificarExistencia = async (jsonData) => {
+    try {
+        const response = await fetch(VERIFICATION_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dados: jsonData }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+             throw new Error(data.error || `Erro HTTP: ${response.status} - Falha na verificação.`);
+        }
+        return data;
+    } catch (error) {
+        return { error: error.message || 'Falha ao consultar o banco de dados.' };
+    }
+};
+
+export const persistirMovimento = async (dadosIA, verificacaoDB) => {
+    try {
+        const response = await fetch(PERSISTENCE_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dadosIA, verificacaoDB }), 
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+             throw new Error(data.error || `Erro HTTP: ${response.status} - Falha na persistência.`);
+        }
+        return data;
+    } catch (error) {
+        console.error('Erro na persistência do DB:', error);
+        return { error: error.message || 'Falha ao salvar no banco de dados.' };
     }
 };
