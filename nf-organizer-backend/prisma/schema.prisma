@@ -1,0 +1,89 @@
+// /nf-organizer-backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Lê a URL de conexão do ambiente injetado pelo Docker Compose
+  url      = env("DATABASE_URL") 
+}
+
+// ----------------------------------------------------
+// MODELOS BASEADOS NO SEU DIAGRAMA ER 
+// ----------------------------------------------------
+
+model Pessoas {
+  idPessoas Int @id @default(autoincrement())
+  tipo String @db.VarChar(45) 
+  razaosocial String @db.VarChar(150)
+  fantasia    String? @db.VarChar(150)
+  documento String @unique @db.VarChar(45) 
+  status String @db.VarChar(45) @default("ATIVO")
+
+  fornecedor MovimentoContas[] @relation("PessoasFornecedor")
+  faturado   MovimentoContas[] @relation("PessoasFaturado")
+
+  @@map("Pessoas") 
+}
+
+model Classificacao {
+  idClassificacao Int @id @default(autoincrement())
+  tipo String @db.VarChar(45)
+  descricao String @unique @db.VarChar(150) 
+  status String @db.VarChar(45) @default("ATIVO")
+
+  movimentos_associados MovimentoContas_has_Classificacao[]
+
+  @@map("Classificacao")
+}
+
+model MovimentoContas {
+  idMovimentoContas Int @id @default(autoincrement())
+  tipo              String @db.VarChar(45) 
+  numeronotafiscal  String @db.VarChar(45)
+  dataemissao       DateTime @db.Date 
+  descricao         String @db.VarChar(300)
+  status            String @db.VarChar(45) @default("PENDENTE")
+  valortotal        Decimal @db.Decimal(10, 2)
+
+  Pessoas_idFornecedorCliente Int
+  Pessoas_idFaturado          Int
+
+  FornecedorCliente Pessoas @relation("PessoasFornecedor", fields: [Pessoas_idFornecedorCliente], references: [idPessoas])
+  Faturado          Pessoas @relation("PessoasFaturado", fields: [Pessoas_idFaturado], references: [idPessoas])
+
+  classificacoes MovimentoContas_has_Classificacao[]
+  parcelas ParcelasContas[]
+
+  @@unique([numeronotafiscal, Pessoas_idFornecedorCliente])
+  @@map("MovimentoContas")
+}
+
+model MovimentoContas_has_Classificacao {
+  MovimentoContas_idMovimentoContas Int
+  Classificacao_idClassificacao Int
+
+  MovimentoContas MovimentoContas @relation(fields: [MovimentoContas_idMovimentoContas], references: [idMovimentoContas], onDelete: Cascade)
+  Classificacao   Classificacao @relation(fields: [Classificacao_idClassificacao], references: [idClassificacao], onDelete: Restrict)
+
+  @@id([MovimentoContas_idMovimentoContas, Classificacao_idClassificacao])
+  @@map("MovimentoContas_has_Classificacao")
+}
+
+model ParcelasContas {
+  idParcelasContas Int @id @default(autoincrement())
+  Identificacao String @db.VarChar(45) 
+  datavencimento DateTime @db.Date
+  valorparcela Decimal @db.Decimal(10, 2)
+  valorpago Decimal @db.Decimal(10, 2) @default(0.00)
+  valorsaldo Decimal @db.Decimal(10, 2)
+  statusparcela String @db.VarChar(45) @default("ABERTA")
+
+  MovimentoContas_idMovimentoContas Int
+  MovimentoContas MovimentoContas @relation(fields: [MovimentoContas_idMovimentoContas], references: [idMovimentoContas], onDelete: Cascade)
+
+  @@unique([Identificacao, MovimentoContas_idMovimentoContas])
+  @@map("ParcelasContas")
+}
