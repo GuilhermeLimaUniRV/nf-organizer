@@ -1,32 +1,28 @@
-# /nf-organizer-fullstack/docker-compose.yml
-
-version: '3.8' # Versão recomendada do Docker Compose
+version: '3.8' 
 
 services:
-  # 1. SERVIÇO BACKEND (Sua API Node.js)
+  # 1. SERVIÇO BACKEND (Node.js/API)
   backend:
     build:
-      context: ./nf-organizer-backend  # Procura o Dockerfile dentro desta pasta
+      context: ./nf-organizer-backend
       dockerfile: Dockerfile
     container_name: nf_backend_dev
-    
-    # Mapeamento da porta do contêiner (3000) para o host (8080)
     ports:
       - "3000:3000" 
-
-    # Injeta a GEMINI_API_KEY e outras variáveis do .env global
     env_file:
       - .env 
-    
-    # Monta o código-fonte localmente para que o 'node --watch' funcione (Hot Reload)
     volumes:
       - ./nf-organizer-backend:/usr/src/app
-      - /usr/src/app/node_modules # Impede que o node_modules local sobrescreva o do contêiner
-    
-    # Comando de inicialização
+      - /usr/src/app/node_modules
     command: npm run dev 
+    # NOVO: Adiciona a dependência para o banco de dados
+    depends_on:
+      - database 
+    # NOVO: Injeta a URL de conexão do banco de dados no Backend (para o Prisma)
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
 
-  # 2. SERVIÇO FRONTEND (Seu App React/Vite)
+  # 2. SERVIÇO FRONTEND (React/Vite)
   frontend:
     build:
       context: ./nf-organizer-frontend # Procura o Dockerfile dentro desta pasta
@@ -49,3 +45,26 @@ services:
     
     # Comando de inicialização do React/Vite
     command: npm run dev
+    
+  # 3. NOVO SERVIÇO: BANCO DE DADOS (PostgreSQL)
+  database:
+    image: postgres:16-alpine # Imagem oficial (leve e estável)
+    container_name: nf_postgres_db
+    restart: always 
+    
+    # Variáveis de ambiente para o PostgreSQL (lidas do arquivo .env da raiz)
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    
+    ports:
+      - "5445:5432" # Porta para acesso externo (opcional)
+    
+    # VOLUME: Garante que os dados sejam salvos e persistam entre reinicializações
+    volumes:
+      - postgres_data:/var/lib/postgresql/data 
+
+# NOVO: Declaração do volume no fim do arquivo
+volumes:
+  postgres_data:
