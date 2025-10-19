@@ -17,7 +17,6 @@
 # Frontend (Pastas de build geradas pelo Vite/React)
 /nf-organizer-frontend/dist 
 /nf-organizer-frontend/build 
-**/prisma/migrations
 # DIVERSOS E SISTEMA OPERACIONAL
 # ----------------------------------------------------
 # Logs
