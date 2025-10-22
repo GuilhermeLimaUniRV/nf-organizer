@@ -1,4 +1,3 @@
-// src/components/ExtractorForm/ExtractorForm.jsx
 import React, { useRef } from 'react';
 import './ExtractorForm.css'; 
 
@@ -28,13 +27,11 @@ const ExtractorForm = ({ file, onFileChange, onSubmit, isLoading }) => {
                     required 
                 />
 
-                {/* Caixa de seleção customizada */}
                 <div className="custom-select-file" onClick={handleButtonClick}>
                     Selecione o arquivo PDF da nota fiscal
                 </div>
             </div>
             
-            {/* Barra de informação do arquivo selecionado */}
             {file && (
                 <div className="file-info-bar">
                     <span className="file-name">{file.name}</span>
@@ -42,7 +39,6 @@ const ExtractorForm = ({ file, onFileChange, onSubmit, isLoading }) => {
                 </div>
             )}
 
-            {/* Botão de Extração */}
             <button 
                 type="submit" 
                 className="extract-button"

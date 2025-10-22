@@ -1,10 +1,8 @@
-// src/components/ResponseDisplay/ResponseDisplay.jsx
 import React from 'react';
 import './ResponseDisplay.css';
 
 const ResponseDisplay = ({ data, viewMode }) => {
     
-    // Apenas a visualização JSON está implementada para ser igual à imagem
     const formattedJson = JSON.stringify(data, null, 2);
 
     return (
@@ -29,7 +27,6 @@ const ResponseDisplay = ({ data, viewMode }) => {
                 </>
             ) : (
                 <div className="placeholder-formatted">
-                    {/* Conteúdo da Aba Formatada (Visualização de Cards/Tabela) */}
                     Visualização Formatada em Desenvolvimento...
                 </div>
             )}

@@ -1,10 +1,9 @@
-/* src/features/InvoiceProcessor/InvoiceProcessor.css */
 
 .invoice-processor-container {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #ffffff; 
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -14,12 +13,14 @@
     color: #333;
     margin-bottom: 5px;
 }
+
 .app-header p {
     color: #666;
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
+
 
 h3 {
     font-size: 18px;
@@ -28,8 +29,8 @@ h3 {
     color: #333;
 }
 
-/* Status e Loaders */
-.loader-text, .error-message {
+.loader-text,
+.error-message {
     padding: 10px;
     margin-top: 15px;
     border-radius: 4px;
@@ -46,23 +47,13 @@ h3 {
     color: #cf1322;
 }
 
-/* ------------------------------------ */
-/* 1. SEÇÃO DE STATUS DE VERIFICAÇÃO (N2) */
-/* ------------------------------------ */
 .verification-status-section {
     margin: 30px 0;
     padding: 20px;
     border: 1px solid #0056b3;
     border-radius: 8px;
-    background-color: #e6f7ff; /* Fundo azul claro/branco fixo */
-    color: #333; /* Cor do texto padrão para este bloco: ESCURA */
-    
-}
-.verification-status-section .status-message {
-    font-size: 14px;
-    margin: 8px 0;
-    font-weight: 500;
-    color: #333 !important; /* Força o texto das mensagens a ser escuro */
+    background-color: #e6f7ff;
+    color: #333;
 }
 
 .verification-status-section h3 {
@@ -72,16 +63,13 @@ h3 {
     padding-bottom: 5px;
 }
 
-.status-message {
+.verification-status-section .status-message {
     font-size: 14px;
     margin: 8px 0;
     font-weight: 500;
+    color: #333 !important;
 }
 
-
-/* ------------------------------------ */
-/* 2. BOTÃO DE PERSISTÊNCIA (SALVAR) */
-/* ------------------------------------ */
 .persistence-actions {
     margin-top: 30px;
     padding-top: 20px;
@@ -89,7 +77,7 @@ h3 {
 }
 
 .save-button {
-    background-color: #52c41a; /* Verde para ação de Salvar/Sucesso */
+    background-color: #52c41a;
     color: white;
     padding: 15px 30px;
     border: none;
@@ -97,9 +85,9 @@ h3 {
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, opacity 0.2s;
     margin-bottom: 15px;
-    width: 100%; 
+    width: 100%;
 }
 
 .save-button:hover:not(:disabled) {
@@ -109,13 +97,68 @@ h3 {
 .save-button:disabled {
     background-color: #b7eb8f;
     cursor: not-allowed;
+    opacity: 0.8;
 }
 
-/* Status Final do DB */
 .db-status {
-    padding: 10px;
+    padding: 12px;
     border-radius: 4px;
     font-weight: bold;
     text-align: center;
     margin-top: 10px;
+}
+
+.db-status.success {
+    background-color: #f6ffed;
+    color: #389e0d;
+    border: 1px solid #b7eb8f;
+}
+
+.db-status.error {
+    background-color: #fff1f0;
+    color: #cf1322;
+    border: 1px solid #ffa39e;
+}
+
+.result-section {
+    margin-top: 40px;
+}
+
+.json-container {
+    background: #f7f7f7;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 10px;
+    overflow-x: auto;
+    max-height: 400px;
+    border: 1px solid #eee;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tab-button {
+    background: #fafafa;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 4px 4px 0 0;
+    transition: background 0.2s, border-bottom 0.2s;
+}
+
+.tab-button:hover {
+    background: #f0f0f0;
+}
+
+.tab-button.active {
+    background: #e6f7ff;
+    border-bottom: 2px solid #1890ff;
 }
