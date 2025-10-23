@@ -31,7 +31,7 @@ Siga estes passos exatos para subir a aplicação completa:
 ### Passo 1: Clonar e Navegar
 
 ```bash
-git clone https://www.dio.me/articles/enviando-seu-projeto-para-o-github
+git clone https://github.com/GuilhermeLimaUniRV/nf-organizer
 cd nf-organizer-fullstack
 ```
 
@@ -80,4 +80,4 @@ Após a migração ser aplicada automaticamente, o sistema está pronto para ser
   * **Verificar logs:** `docker compose logs -f`
   * **Parar os serviços:** `docker compose stop`
   * **Limpeza Total (Parar e Remover tudo):** `docker compose down -v`
-  * **Acessar o DB (pgAdmin):** Host: `localhost`, Porta: `5432`, Usuário: `postgres`
+  * **Acessar o DB (pgAdmin):** Host: `localhost`, Porta: `5445`, e com os dados que vc definiu no seu .env.
