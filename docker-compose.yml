@@ -48,7 +48,7 @@ services:
     
   # 3. NOVO SERVIÇO: BANCO DE DADOS (PostgreSQL)
   database:
-    image: postgres:16-alpine # Imagem oficial (leve e estável)
+    image: pgvector/pgvector:pg16 # Imagem com pgvector baseada em PostgreSQL 16
     container_name: nf_postgres_db
     restart: always 
     
@@ -64,6 +64,7 @@ services:
     # VOLUME: Garante que os dados sejam salvos e persistam entre reinicializações
     volumes:
       - postgres_data:/var/lib/postgresql/data 
+      - ./db-init:/docker-entrypoint-initdb.d:ro
 
 # NOVO: Declaração do volume no fim do arquivo
 volumes:

@@ -40,3 +40,38 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Navegação por abas no App */
+.app-nav {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nav-button:hover {
+  opacity: 0.95;
+}
+
+.nav-button.active {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Toggle de tema herda estilo base de botão */
+.theme-toggle {
+  margin-left: 12px;
+}

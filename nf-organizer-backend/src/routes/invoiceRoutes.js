@@ -3,7 +3,8 @@ import {
     handleExtraction, 
     handleVerification, 
     handlePersistence,
-    handleHealthCheck 
+    handleHealthCheck,
+    handleConsultaRAG 
 } from '../controllers/invoiceController.js';
 
 const router = express.Router();
@@ -15,5 +16,8 @@ router.post('/processar-nf', handleExtraction);
 router.post('/verificar-existencia', handleVerification);
 
 router.post('/persistir-movimento', handlePersistence);
+
+// Nova rota: consulta RAG (SIMPLES ou SEMANTICA)
+router.post('/consultaRAG', handleConsultaRAG);
 
 export default router;
