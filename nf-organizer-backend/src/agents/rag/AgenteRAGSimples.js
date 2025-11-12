@@ -107,7 +107,7 @@ Responda de forma clara e cite os fatos utilizados (com valores ou notas), sem i
 
 Pergunta: ${pergunta}
 Fatos: ${JSON.stringify(fatos)}
-`; 
+`;
     try {
       const response = await this.ai.models.generateContent({
         model: 'gemini-2.5-flash',
