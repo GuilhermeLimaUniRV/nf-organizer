@@ -1,9 +1,13 @@
 import ExtratorDadosAgente from '../agents/extrator/ExtratorDadosAgente.js';
 import PersistenciaAgente from '../agents/persistencia/PersistenciaAgente.js'; 
+import AgenteRAGSimples from '../agents/rag/AgenteRAGSimples.js';
+import AgenteRAGSemantico from '../agents/rag/AgenteRAGSemantico.js';
 import multer from 'multer';
 
 const agenteExtrator = new ExtratorDadosAgente();
 const agentePersistencia = new PersistenciaAgente(); 
+const agenteRAGSimples = new AgenteRAGSimples();
+const agenteRAGSemantico = new AgenteRAGSemantico();
 const upload = multer({ 
     storage: multer.memoryStorage(),
     limits: { fileSize: 5 * 1024 * 1024 }
@@ -89,4 +93,29 @@ export const handleHealthCheck = (req, res) => {
         message: 'API nf-organizer rodando! Envie um PDF para /processar-nf.',
         status: 'OK'
     });
+};
+
+export const handleConsultaRAG = async (req, res) => {
+    const { type, query } = req.body || {};
+    if (!type || !query) {
+        return res.status(400).json({ error: 'Parâmetros ausentes: forneça "type" e "query".' });
+    }
+
+    try {
+        let result;
+        if (type === 'SIMPLES') {
+            result = await agenteRAGSimples.consultar(query);
+        } else if (type === 'SEMANTICA') {
+            result = await agenteRAGSemantico.consultar(query);
+        } else {
+            return res.status(400).json({ error: 'Tipo inválido. Use SIMPLES ou SEMANTICA.' });
+        }
+
+        return res.status(200).json(result);
+    } catch (e) {
+        console.error('Erro na consulta RAG:', e);
+        const message = e?.message || 'Falha durante a consulta RAG.';
+        const stage = e?.stage || undefined;
+        return res.status(500).json({ error: message, stage });
+    }
 };

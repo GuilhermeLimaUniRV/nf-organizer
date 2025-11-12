@@ -1,11 +1,27 @@
 :root {
+  /* Tipografia base */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* Variáveis de tema (Claro) */
+  --bg: #ffffff;
+  --text: #213547;
+  --muted: #666666;
+  --card-bg: #ffffff;
+  --border: #eaeaea;
+  --surface: #f7f7f7;
+  --primary: #0056b3;
+  --primary-contrast: #ffffff;
+  --accent: #646cff;
+  --button-bg: var(--primary);
+  --button-disabled-bg: #a9c6e8;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  /* Preferência do sistema reportada ao navegador */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text);
+  background-color: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,13 +29,29 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Tema Escuro explícito via data-theme */
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #eaeaea;
+  --muted: #aaaaaa;
+  --card-bg: #1e1e1e;
+  --border: #2a2a2a;
+  --surface: #1a1a1a;
+  --primary: #3b82f6;
+  --primary-contrast: #ffffff;
+  --accent: #8aa2ff;
+  --button-bg: var(--primary);
+  --button-disabled-bg: #274a8b;
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--accent);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  opacity: 0.9;
 }
 
 body {
@@ -28,6 +60,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--text);
+  background-color: var(--bg);
 }
 
 h1 {
@@ -42,27 +76,17 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--button-bg);
+  color: var(--primary-contrast);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: opacity 0.25s, border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  opacity: 0.95;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+/* Removemos overrides do prefers-color-scheme para priorizar data-theme explícito */
