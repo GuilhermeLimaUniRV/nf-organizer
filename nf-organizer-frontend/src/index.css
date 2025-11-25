@@ -32,16 +32,16 @@
 /* Tema Escuro explícito via data-theme */
 [data-theme="dark"] {
   --bg: #121212;
-  --text: #eaeaea;
-  --muted: #aaaaaa;
-  --card-bg: #1e1e1e;
-  --border: #2a2a2a;
-  --surface: #1a1a1a;
+  --text: #e5e7eb;
+  --muted: #cbd5e1;
+  --card-bg: #18181b;
+  --border: #2f3136;
+  --surface: #202225;
   --primary: #3b82f6;
   --primary-contrast: #ffffff;
   --accent: #8aa2ff;
   --button-bg: var(--primary);
-  --button-disabled-bg: #274a8b;
+  --button-disabled-bg: #1f3b70;
   --shadow: rgba(0, 0, 0, 0.45);
 }
 
@@ -56,8 +56,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: block;
   min-width: 320px;
   min-height: 100vh;
   color: var(--text);
