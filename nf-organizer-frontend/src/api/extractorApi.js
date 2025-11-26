@@ -1,6 +1,8 @@
 // src/api/extractorApi.js
 
-const API_BASE_URL = 'http://localhost:3000/api/notaFiscal';
+const GESTAO_BASE = (import.meta?.env?.VITE_API_URL) || 'http://localhost:3000/api/gestao';
+const API_ROOT = GESTAO_BASE.replace(/\/gestao$/, '');
+const API_BASE_URL = `${API_ROOT}/notaFiscal`;
 
 const EXTRACTION_API_URL = `${API_BASE_URL}/processar-nf`; 
 const VERIFICATION_API_URL = `${API_BASE_URL}/verificar-existencia`; 

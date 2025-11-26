@@ -1,6 +1,8 @@
 // src/api/ragApi.js
 
-const API_BASE_URL = 'http://localhost:3000/api/notaFiscal';
+const GESTAO_BASE = (import.meta?.env?.VITE_API_URL) || 'http://localhost:3000/api/gestao';
+const API_ROOT = GESTAO_BASE.replace(/\/gestao$/, '');
+const API_BASE_URL = `${API_ROOT}/notaFiscal`;
 const RAG_API_URL = `${API_BASE_URL}/consultaRAG`;
 
 export const consultarRAG = async ({ type, query }) => {
