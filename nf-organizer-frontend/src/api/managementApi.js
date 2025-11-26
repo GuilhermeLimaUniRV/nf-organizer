@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api/gestao'
+const API_BASE_URL = (import.meta?.env?.VITE_API_URL) || 'http://localhost:3000/api/gestao'
 
 export const listarPessoas = async (params = {}) => {
   const url = new URL(`${API_BASE_URL}/pessoas`)
@@ -108,4 +108,3 @@ export const excluirConta = async (id) => {
   if (!res.ok) throw new Error(data.error || 'Falha ao excluir conta')
   return data
 }
-
