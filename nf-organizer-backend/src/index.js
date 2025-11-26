@@ -7,9 +7,12 @@ const app = express();
 const PORT = process.env.PORT || 3000; 
 
 const allowed = (process.env.CORS_ORIGINS || 'http://localhost:5173').split(',');
+const allowedSuffixes = (process.env.CORS_ORIGIN_SUFFIXES || '').split(',').filter(Boolean);
 const corsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowed.includes(origin)) return callback(null, true);
+    const okExact = !origin || allowed.includes(origin);
+    const okSuffix = origin && allowedSuffixes.some(suf => origin.endsWith(suf));
+    if (okExact || okSuffix) return callback(null, true);
     return callback(new Error('CORS bloqueado'));
   },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
